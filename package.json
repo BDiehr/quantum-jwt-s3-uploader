@@ -1,6 +1,6 @@
 {
-  "name": "react-s3-uploader",
-  "version": "1.1.6",
+  "name": "quantum-react-s3-uploader",
+  "version": "0.0.1",
   "description": "React component that renders a file input and automatically uploads to an S3 bucket",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:odysseyscience/react-s3-uploader.git"
+    "url": "git@github.com:BDiehr/quantum-jwt-s3-uploader"
   },
   "keywords": [
     "react",
@@ -18,13 +18,13 @@
     "bucket"
   ],
   "author": {
-    "name": "Sean Adkinson"
+    "name": "Brian Diehr"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/odysseyscience/react-s3-uploader/issues"
+    "url": "https://github.com/BDiehr/quantum-jwt-s3-uploader/issues"
   },
-  "homepage": "https://github.com/odysseyscience/react-s3-uploader",
+  "homepage": "https://github.com/BDiehr/quantum-jwt-s3-uploader",
   "dependencies": {
     "aws-sdk": "2.x",
     "fs": "0.0.2",
@@ -42,20 +42,15 @@
   "_from": "react-s3-uploader@>=1.1.6 <2.0.0",
   "_npmVersion": "1.4.20",
   "_npmUser": {
-    "name": "sadkinson",
-    "email": "sean.adkinson@gmail.com"
+    "name": "btdiehr",
+    "email": "btdiehr@gmail.com"
   },
   "maintainers": [
     {
-      "name": "sadkinson",
-      "email": "sean.adkinson@gmail.com"
+      "name": "btdiehr",
+      "email": "btdiehr@gmail.com"
     }
   ],
-  "dist": {
-    "shasum": "e410b7dea60fcba99ed933da0a3f2bc99be4a63e",
-    "tarball": "http://registry.npmjs.org/react-s3-uploader/-/react-s3-uploader-1.1.6.tgz"
-  },
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/react-s3-uploader/-/react-s3-uploader-1.1.6.tgz",
   "readme": "ERROR: No README data found!"
 }

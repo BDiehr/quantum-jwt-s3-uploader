@@ -1,17 +1,18 @@
-react-s3-uploader
+quantum-react-s3-uploader
 ===========================
 
+## Under Construction ##
 Provides a `React` component that automatically uploads to an S3 Bucket.
 
 Install
 -----------
 
-    $ npm install react-s3-uploader
+    $ npm install quantum-react-s3-uploader
 
 From Browser
 ------------
 
-    var ReactS3Uploader = require('react-s3-uploader');
+    var ReactS3Uploader = require('quantum-react-s3-uploader');
 
     ...
 
@@ -39,7 +40,7 @@ Server-Side
 ### Bundled router
 You can use the Express router that is bundled with this module to answer calls to `/s3/sign`
 
-    app.use('/s3', require('react-s3-uploader/s3router')({
+    app.use('/s3', require('quantum-react-s3-uploader/s3router')({
         bucket: "MyS3Bucket"
     }));
 
