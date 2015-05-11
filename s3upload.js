@@ -9,7 +9,7 @@ function S3Upload(options) {
     if (!options) {
         options = {};
     }
-    for (let option in options) {
+    for (var option in options) {
         if (options.hasOwnProperty(option)) {
             this[option] = options[option];
         }
@@ -147,8 +147,12 @@ S3Upload.prototype.getMimeType = function(filename) {
     var extensions = filename.match(fileExtensionRegEx);
     var extension = extensions[1];
 
-    let mimeType = null;
 
+    var mimeType = null;
+
+    /**
+     * Extend node-mime to handle chemicals
+     */
     var moleculeExtensions = ['pdb', 'sdf', 'xyz', 'mol2', 'txt'];
     var isMolecule = moleculeExtensions.indexOf(extension) >= 0;
 

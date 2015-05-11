@@ -1,14 +1,14 @@
 {
-  "name": "quantum-react-s3-uploader",
-  "version": "0.0.1",
-  "description": "React component that renders a file input and automatically uploads to an S3 bucket",
+  "name": "fancy-react-s3-uploader",
+  "version": "0.0.1.0",
+  "description": "React component for dragging and dropping fils, connection to server for signing URLs for uploading, S3 connection, and a simple progress bar/abort UX.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:BDiehr/quantum-jwt-s3-uploader"
+    "url": "git@github.com:BDiehr/quantum-jwt-s3-uploader.git"
   },
   "keywords": [
     "react",
@@ -28,29 +28,15 @@
   "dependencies": {
     "aws-sdk": "2.x",
     "fs": "0.0.2",
+    "lodash": "^3.8.0",
     "mime": "^1.3.4",
     "node-uuid": "1.x",
-    "object-assign": "^2.0.0"
+    "object-assign": "^2.0.0",
+    "react": "^0.13.3",
+    "react-bootstrap": "^0.21.2"
   },
   "peerDependencies": {
     "express": "4.x",
     "react": "*"
-  },
-  "gitHead": "e51db18687d005771ae615f631374ba145a1680f",
-  "_id": "react-s3-uploader@1.1.6",
-  "_shasum": "e410b7dea60fcba99ed933da0a3f2bc99be4a63e",
-  "_from": "react-s3-uploader@>=1.1.6 <2.0.0",
-  "_npmVersion": "1.4.20",
-  "_npmUser": {
-    "name": "btdiehr",
-    "email": "btdiehr@gmail.com"
-  },
-  "maintainers": [
-    {
-      "name": "btdiehr",
-      "email": "btdiehr@gmail.com"
-    }
-  ],
-  "directories": {},
-  "readme": "ERROR: No README data found!"
+  }
 }
