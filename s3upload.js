@@ -108,7 +108,7 @@ S3Upload.prototype.executeOnSignedUrl = function(file, callback) {
 
 S3Upload.prototype.createProgressHandler = function(signResult, file, xhr) {
     return function(e) {
-        let percentLoaded;
+        var percentLoaded;
         if (e.lengthComputable) {
             percentLoaded = Math.round((e.loaded / e.total) * 100);
             return this.onProgress(percentLoaded, percentLoaded === 100 ? 'Finalizing.' : 'Uploading.', signResult, file, this.createAbort(xhr));
@@ -147,12 +147,8 @@ S3Upload.prototype.getMimeType = function(filename) {
     var extensions = filename.match(fileExtensionRegEx);
     var extension = extensions[1];
 
-
     var mimeType = null;
 
-    /**
-     * Extend node-mime to handle chemicals
-     */
     var moleculeExtensions = ['pdb', 'sdf', 'xyz', 'mol2', 'txt'];
     var isMolecule = moleculeExtensions.indexOf(extension) >= 0;
 

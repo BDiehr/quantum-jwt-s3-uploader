@@ -1,12 +1,26 @@
 'use strict';
 var React = require('react')
-  , S3Upload = require('./s3upload.js')
-  , Dropzone = require('./Dropzone')
-  , bootstrap = require('react-bootstrap')
-  , ProgressBar = bootstrap.ProgressBar;
-
+    , S3Upload = require('./s3upload.js')
+    , FileProgress = require('./FileProgress.js')
+    , Dropzone = require('./Dropzone');
 
 var ReactS3Uploader = React.createClass({
+
+    propTypes: {
+        signingUrl: React.PropTypes.string.isRequired,
+        onProgress: React.PropTypes.func,
+        onFinish: React.PropTypes.func,
+        token: React.PropTypes.string.isRequired,
+        bucket: React.PropTypes.string.isRequired,
+        onError: React.PropTypes.func
+    },
+
+    defaultProps: {
+        onProgress: function(percent, message){},
+        onFinish: function(signResult){},
+        onError: function(message){}
+    },
+
     getInitialState: function() {
         return { uploads: [] };
     },
@@ -24,8 +38,6 @@ var ReactS3Uploader = React.createClass({
     getUpload: function(filename) {
         var upload = null;
         var uploads = this.state.uploads;
-        console.log('=== Uploads ===');
-        console.log(uploads);
         for(var i = 0, len = uploads.length; i < len; i ++) {
             var currUpload = uploads[i];
             if(currUpload.filename === filename) {
@@ -48,7 +60,7 @@ var ReactS3Uploader = React.createClass({
             }
         }
 
-        if(uploadIndex) {
+        if(uploadIndex >= 0) {
             uploads.splice(uploadIndex, 1);
             this.setState({
                 uploads: uploads
@@ -75,32 +87,10 @@ var ReactS3Uploader = React.createClass({
         }
     },
 
-    propTypes: {
-        signingUrl: React.PropTypes.string.isRequired,
-        onProgress: React.PropTypes.func,
-        onFinish: React.PropTypes.func,
-        token: React.PropTypes.string.isRequired,
-        bucket: React.PropTypes.string.isRequired,
-        onError: React.PropTypes.func
-    },
-
-    defaultProps: {
-        onProgress: function(percent, message) {
-            console.log('Upload progress: ' + percent + '% ' + message);
-        },
-        onFinish: function (signResult) {
-            console.log("Upload finished: " + signResult.publicUrl);
-        },
-        onError: function (message) {
-            console.log("Upload error: " + message);
-        }
-    },
-
     onProgress: function(percent, message, signResult, file, abort) {
         if(signResult) {
             var filename =  file.name;
             var currUpload = this.getUpload(filename);
-            console.log(currUpload);
             if(currUpload) {
                 currUpload.percent = percent;
                 this.updateUpload(filename, currUpload);
@@ -126,6 +116,7 @@ var ReactS3Uploader = React.createClass({
         };
     },
 
+
     onFinish: function(signResult) {
         var filename =  signResult.filename;
         this.deleteUpload(filename);
@@ -135,18 +126,8 @@ var ReactS3Uploader = React.createClass({
         }
     },
 
-    uploadFile: function(e) {
-        new S3Upload({
-            token: this.props.token,
-            fileElement: e.target,
-            signingUrl: this.props.signingUrl,
-            onProgress: this.onProgress,
-            onFinishS3Put: this.onFinish,
-            onError: this.props.onError
-        });
-    },
 
-    onDrop: function(files) {
+    uploadFile: function(files) {
         new S3Upload({
             token: this.props.token,
             fileElement: files,
@@ -160,23 +141,18 @@ var ReactS3Uploader = React.createClass({
 
     displayLoaders: function() {
         var loaders = [];
-        var keyCoutner = 0;
         var uploads = this.state.uploads;
-
         for(var i = 0, len = uploads.length; i < len; i++) {
-            keyCoutner = keyCoutner + 1;
             var upload = uploads[i];
             var filename = upload.filename;
             var file = upload.file;
             var percent = file.percent;
-
             if(percent < 100) {
                 loaders.push(
-                    React.createElement("div", {key: keyCoutner},
-                        React.createElement("a", {onClick: this.abort(filename).bind(this)}, "cancel"),
-                        " uploading ", filename,
-                        React.createElement(ProgressBar, {active: true, now: percent, label: "%(percent)s%"})
-                    )
+                    React.createElement(FileProgress, {key: filename,
+                        onCancel: this.abort(filename).bind(this),
+                        percent: percent,
+                        filename: filename})
                 );
             }
 
@@ -187,7 +163,7 @@ var ReactS3Uploader = React.createClass({
     render: function() {
         return (
             React.createElement("div", null,
-                React.createElement(Dropzone, {onDrop: this.onDrop, style: this.props.style},
+                React.createElement(Dropzone, {onDrop: this.uploadFile, style: this.props.style},
                     this.props.children
                 ),
                 React.createElement("div", null,
@@ -197,5 +173,6 @@ var ReactS3Uploader = React.createClass({
         );
     }
 });
+
 
 module.exports = ReactS3Uploader;

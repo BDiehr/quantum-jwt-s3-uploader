@@ -1,6 +1,6 @@
 {
   "name": "fancy-react-s3-uploader",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React component for dragging and dropping fils, connection to server for signing URLs for uploading, S3 connection, and a simple progress bar/abort UX.",
   "main": "index.js",
   "scripts": {
